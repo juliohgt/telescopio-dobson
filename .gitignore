@@ -1,0 +1,16 @@
+# Configuracao local: contem a LOCALIZACAO do usuario. Nunca versionar.
+pc/config.json
+
+# Efemeride baixada pelo skyfield no primeiro uso (~17 MB)
+pc/dados/
+
+# Python
+pc/.venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Arduino / editores
+build/
+.vscode/
+.idea/
