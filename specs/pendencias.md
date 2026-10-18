@@ -9,6 +9,8 @@
 | **Testes da tela com o layout atual** | os 6 testes opcionais passaram no layout anterior e não foram rodados de novo |
 | **Modo noturno** | conferido só sem janela (as cores trocam); não foi revisado visualmente |
 | **Teclado do modo manual no terminal** | lido com `msvcrt`; não testado dentro de terminais embutidos (ex.: o do VS Code) |
+| **ATmega168** | o firmware compila (91% da flash), mas sobram só 316 bytes de RAM para a pilha. Se a placa reiniciar sozinha, o caminho é tirar o canal USB do firmware (os buffers da `Serial` liberam ~200 bytes) e usar só o Bluetooth |
+| **Windows 10** | a tela usa as fontes Bahnschrift e Cascadia Mono; sem a Cascadia (vem com o Windows Terminal), o Tk usa outra fonte. Só visual, não testado |
 
 ## Limitações conhecidas
 

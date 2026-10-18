@@ -22,6 +22,19 @@ que zera a velocidade e o estado interno da rampa. Sem isso, o `run()` poderia p
 com uma velocidade velha. `setSpeed()` é limitado por `SPEED` (o AccelStepper
 aplica `constrain`), então `SPEED` também limita JOG e RATE.
 
+## Canais
+
+O firmware aceita comandos por **dois canais ao mesmo tempo**, a 9600 bps cada:
+
+| Canal | Pinos | Uso |
+|---|---|---|
+| HC-06 (Bluetooth), `SoftwareSerial` | 10 (RX) e 11 (TX) | uso normal, sem fio |
+| USB (`Serial`) | 0 e 1, via chip FTDI | bancada, e alternativa ao Bluetooth |
+
+Cada canal tem seu buffer de linha, e **a resposta sai pelo canal de onde veio o
+comando**. O `READY` do `setup()` sai pelos dois. A gravação do firmware usa o USB
+(pinos 0/1) e não conflita com o HC-06.
+
 ## Protocolo
 
 - Texto, 9600 bps, linhas terminadas por `\n` ou `\r`; no máximo 47 caracteres por linha.
@@ -56,6 +69,8 @@ Erros: `ERR <comando>` (comando desconhecido ou sem argumentos), `ERR AXIS <eixo
   meio da sessão, o Arduino reiniciou e a posição voltou a 0. O PC apaga o alinhamento.
   Pelo USB o Arduino reinicia ao abrir a porta (sinal DTR) e manda `READY`; pelo HC-06
   não reinicia e não manda. Por isso **a conexão é confirmada com `PING`, nunca com `READY`**.
+  Atenção: abrir a porta USB **reinicia o Arduino e zera a posição**, inclusive se outro
+  programa estiver usando o Bluetooth naquele momento.
 
 ## Simulador
 
@@ -67,8 +82,12 @@ conexão, como o Arduino pelo USB.
 
 ## Recursos
 
-Compilado para `arduino:avr:diecimila:cpu=atmega328`: 11.768 bytes de flash (38%) e
-478 bytes de RAM (23%).
+| Chip da Duemilanove | Flash | RAM | Sobra para a pilha |
+|---|---|---|---|
+| ATmega328P (`cpu=atmega328`) | 13.092 bytes (42%) | 708 bytes (34%) | 1.340 bytes |
+| ATmega168 (`cpu=atmega168`) | 13.092 bytes (91%) | 708 bytes (69%) | 316 bytes: apertado |
+
+Boa parte da RAM são os buffers das duas seriais (`Serial` e `SoftwareSerial`).
 
 ```bash
 arduino-cli core install arduino:avr

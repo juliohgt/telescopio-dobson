@@ -50,7 +50,7 @@ ecossistema bem menor. A serial é trivial nas duas.
 | RNF1 | A tela nunca congela: comunicação e operações longas rodam fora da thread da interface |
 | RNF2 | Modo noturno só em vermelho, para preservar a adaptação do olho ao escuro |
 | RNF3 | Funciona offline no campo, depois do primeiro download da efeméride (~17 MB) |
-| RNF4 | O firmware cabe com folga na Duemilanove (hoje: 38% da flash, 23% da RAM) |
+| RNF4 | O firmware cabe com folga na Duemilanove com ATmega328P (42% da flash, 34% da RAM); no ATmega168 cabe, mas apertado |
 | RNF5 | Nenhum dado pessoal (localização) vai para o repositório: `pc/config.json` é ignorado pelo Git |
 
 ## Fora de escopo

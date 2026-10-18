@@ -26,7 +26,8 @@ executa passos**. Visão geral e uso: [README.md](README.md).
 ```powershell
 cd pc
 py -m venv .venv; .venv\Scripts\python -m pip install -r requirements.txt
-.venv\Scripts\python -m unittest discover -s testes        # 35 testes, sem janela
+.venv\Scripts\python -c "import astro; astro.Ceu(0, 0)"   # baixa a efemeride; sem ela, 4 testes pulam
+.venv\Scripts\python -m unittest discover -s testes        # OK (skipped=6): 35 testes, sem janela
 .venv\Scripts\python simulador.py                          # Arduino falso em socket://127.0.0.1:7777
 arduino-cli compile --fqbn arduino:avr:diecimila:cpu=atmega328 firmware/controlador
 ```

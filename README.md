@@ -38,24 +38,28 @@ uma placa simples como a Duemilanove.
 
 ## Começando
 
-Requisitos: Windows, Python 3.11 ou mais novo e, para gravar o firmware, a Arduino IDE.
+**Guia completo, do zero:** [specs/instalacao.md](specs/instalacao.md) (instalar o
+Python, gravar o Arduino, parear o Bluetooth, problemas comuns).
 
-```bash
-cd pc
+Resumo, num PowerShell aberto na pasta `pc` (Windows 10/11, Python 3.11+):
+
+```powershell
 py -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -c "import astro; astro.Ceu(0, 0)"     # baixa a efeméride (~17 MB), só na 1ª vez
 ```
 
-**Sem hardware (simulador):** em um terminal, `python simulador.py`; em outro,
-`python tela.py socket://127.0.0.1:7777`.
+Os comandos usam `.venv\Scripts\python` direto porque o `activate` costuma ser
+bloqueado pela política padrão do PowerShell.
 
-**Com hardware:** grave `firmware/controlador/controlador.ino` (biblioteca AccelStepper),
-monte as ligações de [specs/hardware.md](specs/hardware.md), pareie o HC-06 no Windows
-e rode `python tela.py`, escolhendo a porta COM.
+**Sem hardware (simulador):** em um PowerShell, `.venv\Scripts\python simulador.py`;
+em outro, `.venv\Scripts\python tela.py socket://127.0.0.1:7777`.
 
-Na primeira vez, o skyfield baixa a efeméride `de421.bsp` (~17 MB, NASA/JPL) para
-`pc/dados/`; depois funciona offline.
+**Com hardware:** grave `firmware/controlador/controlador.ino` (biblioteca AccelStepper;
+placa "Arduino Duemilanove or Diecimila"; processador ATmega328P ou ATmega168, conforme
+o chip), monte as ligações de [specs/hardware.md](specs/hardware.md) e rode
+`.venv\Scripts\python tela.py`. O Arduino atende **pelo cabo USB ou pelo HC-06**;
+escolha a porta COM no topo da janela.
 
 ### Uma noite de observação
 
@@ -78,19 +82,20 @@ Detalhes em [specs/hardware.md](specs/hardware.md).
 
 ## Testes
 
-```bash
+```powershell
 cd pc
 .venv\Scripts\python -m unittest discover -s testes -v
 ```
 
-35 testes rodam por padrão (protocolo, geometria, alinhamento, GoTo e rastreamento
-contra o simulador). Os 6 testes da tela são opcionais porque abrem janelas; ver
-[specs/testes.md](specs/testes.md).
+Com a efeméride baixada, 35 testes rodam (protocolo, geometria, alinhamento, GoTo e
+rastreamento contra o simulador) e terminam em `OK (skipped=6)`: os 6 da tela são
+opcionais porque abrem janelas. Ver [specs/testes.md](specs/testes.md).
 
 ## Documentação
 
 | | |
 |---|---|
+| [specs/instalacao.md](specs/instalacao.md) | instalação passo a passo e problemas comuns |
 | [specs/requisitos.md](specs/requisitos.md) | objetivo, escopo e premissas |
 | [specs/hardware.md](specs/hardware.md) | materiais, ligações, Vref, mecânica |
 | [specs/firmware.md](specs/firmware.md) | Arduino e protocolo serial |

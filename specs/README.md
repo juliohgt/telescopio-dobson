@@ -6,6 +6,7 @@ testar ou mudar o projeto.
 
 | Documento | Conteúdo | Leia quando for... |
 |---|---|---|
+| [instalacao.md](instalacao.md) | instalação passo a passo e problemas comuns | rodar o projeto pela primeira vez |
 | [requisitos.md](requisitos.md) | objetivo, escopo, requisitos e premissas | entender o que o sistema promete e o que não promete |
 | [hardware.md](hardware.md) | lista de materiais, ligações, alimentação, Vref, mecânica | montar ou alterar a parte elétrica e mecânica |
 | [firmware.md](firmware.md) | papel do Arduino e protocolo serial completo | mexer no `.ino`, no simulador ou na comunicação |

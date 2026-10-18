@@ -4,8 +4,8 @@
 
 | Qtd | Item | Observação |
 |---|---|---|
-| 1 | Arduino Duemilanove (ATmega328P) | um UNO também serve: mesma pinagem e mesmo chip |
-| 1 | Módulo Bluetooth HC-06 | opcional: o cabo USB faz o mesmo papel |
+| 1 | Arduino Duemilanove (ATmega328P ou ATmega168) | um UNO também serve: mesma pinagem; com o 168 a RAM fica apertada (ver [firmware.md](firmware.md)) |
+| 1 | Módulo Bluetooth HC-06 | opcional: o firmware também atende pelo cabo USB |
 | 2 | Driver DRV8825 (placa padrão, sensor de 0,1 Ω) | um por eixo, com dissipador |
 | 2 | Motor de passo NEMA 17 (1,8° = 200 passos/volta) | anote a **corrente por fase** da etiqueta |
 | 2 | Capacitor eletrolítico ≥ 100 µF, tensão acima da fonte | um por driver, entre VMOT e GND |

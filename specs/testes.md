@@ -14,7 +14,10 @@ cd pc
 | `test_fase2.py` | fluxo completo contra o simulador: alinhar 2 estrelas → GoTo na 3ª (erro < 0,06°) → rastrear em tempo real (erro < 0,004°) |
 | `test_tela.py` | tela: segurar e soltar, repetição de tecla, parar, tema, alinhar/apontar/seguir. **Opcional** (ver abaixo) |
 
-Resultado atual: 41 testes; 35 rodam por padrão e passam; os 6 da tela são opcionais.
+Resultado atual: 41 testes; com a efeméride baixada, 35 rodam e passam
+(`OK (skipped=6)`, os 6 da tela são opcionais). Num clone novo, sem a efeméride, mais
+4 testes de fluxo são pulados até ela ser baixada (ver [instalacao.md](instalacao.md#5-primeiro-uso-baixar-a-efeméride)).
+Conferido num clone limpo do repositório.
 
 **O teste de rastreamento foi conferido pelo avesso:** com o rastreamento desligado de
 propósito (velocidades forçadas a zero), ele falha com erro de 42″, que é o quanto a
@@ -40,10 +43,12 @@ Compila sem a placa (ver [firmware.md](firmware.md)). Sem avisos no código do p
 Siga na ordem: cada etapa depende da anterior. Anote os resultados no fim.
 
 ### A. Bancada, sem motores
-1. **Gravar o firmware** pelo USB, com o HC-06 **desligado** (ele divide a serial
-   com o USB). Arduino IDE → biblioteca AccelStepper → placa Duemilanove (ATmega328P).
-2. **Conversar pelo USB:** `py controle.py`, escolha a COM do USB. Deve aparecer
-   `<< READY` e, a qualquer tecla, `<< PONG`.
+1. **Gravar o firmware** pelo USB, seguindo [instalacao.md](instalacao.md#7-gravar-o-firmware-no-arduino)
+   (placa "Arduino Duemilanove or Diecimila", processador conforme o chip). O HC-06
+   pode ficar ligado: ele usa os pinos 10/11, e a gravação usa os pinos 0/1.
+2. **Conversar pelo USB:** na pasta `pc`, `.venv\Scripts\python controle.py` e escolha a
+   COM do USB. Deve aparecer `<< READY` (abrir a porta USB reinicia o Arduino) e, a
+   qualquer tecla, `<< PONG`.
 3. **Conversar pelo Bluetooth:** monte o divisor de tensão, ligue o HC-06, pareie no
    Windows e abra a COM do Bluetooth. Deve responder `PONG`. **Não** aparece `READY`
    (abrir a porta pelo Bluetooth não reinicia o Arduino); isso é normal.
